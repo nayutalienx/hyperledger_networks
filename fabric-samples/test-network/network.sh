@@ -16,6 +16,11 @@ export PATH=${PWD}/../bin:$PATH
 export FABRIC_CFG_PATH=${PWD}/configtx
 export VERBOSE=false
 
+export FABRIC_CA_SERVER_BCCSP_DEFAULT=PKCS11
+export FABRIC_CA_SERVER_BCCSP_PKCS11_LIBRARY=/usr/local/lib/softhsm/libsofthsm2.so
+export FABRIC_CA_SERVER_BCCSP_PKCS11_PIN=71811222
+export FABRIC_CA_SERVER_BCCSP_PKCS11_LABEL=fabric
+
 source scriptUtils.sh
 
 # Print the usage message

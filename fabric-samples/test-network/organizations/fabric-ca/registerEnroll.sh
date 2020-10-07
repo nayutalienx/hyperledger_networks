@@ -1,5 +1,10 @@
 #!/bin/bash
 
+export FABRIC_CA_SERVER_BCCSP_DEFAULT=PKCS11
+export FABRIC_CA_SERVER_BCCSP_PKCS11_LIBRARY=/usr/local/lib/softhsm/libsofthsm2.so
+export FABRIC_CA_SERVER_BCCSP_PKCS11_PIN=71811222
+export FABRIC_CA_SERVER_BCCSP_PKCS11_LABEL=fabric
+
 source scriptUtils.sh
 
 function createOrg1() {

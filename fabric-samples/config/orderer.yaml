@@ -126,13 +126,13 @@ General:
         # Settings for the PKCS#11 crypto provider (i.e. when DEFAULT: PKCS11)
         PKCS11:
             # Location of the PKCS11 module library
-            Library:
+            Library: /usr/local/lib/softhsm/libsofthsm2.so
             # Token Label
-            Label:
+            Label: fabric
             # User PIN
-            Pin:
-            Hash:
-            Security:
+            Pin: "71811222"
+            Hash: SHA2
+            Security: 256
             FileKeyStore:
                 KeyStore:
 

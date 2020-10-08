@@ -317,6 +317,7 @@ csr:
    hosts:
      - c220c25514aa
      - localhost
+     - ca_orderer
    ca:
       expiry: 131400h
       pathlength: 1

@@ -45,13 +45,14 @@ services:
       - SOFTHSM2_CONF=/etc/softhsm2.conf
       - FABRIC_LOGGING_SPEC=debug
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric
-    command: sh -c 'softhsm2-util --init-token --slot 0 --label "fabric" --so-pin 71811222 --pin 71811222 && sleep 10000000000 && rm -rf /var/hyperledger/orderer/msp/keystore && orderer'
+    command: sh -c '/entrypoint.sh'
     volumes:
         - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
         - ../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp:/var/hyperledger/orderer/msp
         - ../organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/:/var/hyperledger/orderer/tls
         - orderer.example.com:/var/hyperledger/production/orderer
-        #- ../../config/orderer.yaml:
+        - ../organizations:/organizations
+        - ../scripts/entry-points/orderer.sh:/entrypoint.sh
     ports:
       - 7050:7050
     networks:
@@ -96,12 +97,12 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         - ../organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp:/etc/hyperledger/fabric/msp
-        #- ../organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp:/etc/hyperledger/fabric/msp
-        #- ../organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls:/etc/hyperledger/fabric/tls
         - ../organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls:/etc/hyperledger/fabric/tls
+        - ../organizations:/organizations
+        - ../scripts/entry-points/peer0org1.sh:/entrypoint.sh
         - peer0.org1.example.com:/var/hyperledger/production
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
-    command: sh -c 'sleep 10000000000000 && softhsm2-util --init-token --slot 0 --label "fabric" --so-pin 71811222 --pin 71811222 && sleep 10000000000000 && rm -rf /etc/hyperledger/fabric/msp/keystore && peer node start'
+    command: sh -c '/entrypoint.sh'
     ports:
       - 7051:7051
     networks:
@@ -148,8 +149,10 @@ services:
         - ../organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp:/etc/hyperledger/fabric/msp
         - ../organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls:/etc/hyperledger/fabric/tls
         - peer0.org2.example.com:/var/hyperledger/production
+        - ../organizations:/organizations
+        - ../scripts/entry-points/peer0org2.sh:/entrypoint.sh
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
-    command: sh -c 'softhsm2-util --init-token --slot 0 --label "fabric" --so-pin 71811222 --pin 71811222 && rm -rf /etc/hyperledger/fabric/msp/keystore && peer node start'
+    command: sh -c '/entrypoint.sh'
     ports:
       - 9051:9051
     networks:

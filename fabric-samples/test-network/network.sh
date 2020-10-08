@@ -239,7 +239,7 @@ function createOrgs() {
 
     IMAGE_TAG=${CA_IMAGETAG} docker-compose -f $COMPOSE_FILE_CA up -d 2>&1
 
-    . organizations/fabric-ca/registerEnroll.sh
+    . organizations/fabric-ca/registerEnrollFromContainer.sh
 
   while :
     do
@@ -250,15 +250,15 @@ function createOrgs() {
       fi
     done
 
-    infoln "Create Org1 Identities"
+    infoln "Create Org1 Identities (SKIPPED GENERATING MSP, ENROLL FROM CONTAINER)"
 
     createOrg1
 
-    infoln "Create Org2 Identities"
+    infoln "Create Org2 Identities (SKIPPED GENERATING MSP, ENROLL FROM CONTAINER)"
 
     createOrg2
 
-    infoln "Create Orderer Org Identities"
+    infoln "Create Orderer Org Identities (SKIPPED GENERATING MSP, ENROLL FROM CONTAINER)"
 
     createOrderer
 

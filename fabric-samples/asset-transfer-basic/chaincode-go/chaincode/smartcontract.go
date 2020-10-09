@@ -47,6 +47,27 @@ func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) 
 	return nil
 }
 
+// Hello
+func (cb *SmartContract) Hello(ctx contractapi.TransactionContextInterface, args string) (string, error) {
+
+
+	txId := ctx.GetStub().GetTxID()
+
+	err := ctx.GetStub().PutState(txId, []byte("1"))
+	if err != nil {
+			return "nil", err
+	}
+
+
+	return "hello", nil
+}
+
+
+func (cb *SmartContract) Hello1(ctx contractapi.TransactionContextInterface, args string) (string, error) {
+	return "hello", nil
+}
+
+
 // CreateAsset issues a new asset to the world state with given details.
 func (s *SmartContract) CreateAsset(ctx contractapi.TransactionContextInterface, id string, color string, size int, owner string, appraisedValue int) error {
 	exists, err := s.AssetExists(ctx, id)

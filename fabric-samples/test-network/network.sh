@@ -262,6 +262,20 @@ function createOrgs() {
 
     createOrderer
 
+    infoln "Create Orderer2 Org Identities (SKIPPED GENERATING MSP, ENROLL FROM CONTAINER)"
+
+    createOrderer2
+
+    infoln "Create Orderer3 Org Identities (SKIPPED GENERATING MSP, ENROLL FROM CONTAINER)"
+
+    createOrderer3
+
+    # 4 ORDERER IS OPTIONAL
+
+    #infoln "Create Orderer4 Org Identities (SKIPPED GENERATING MSP, ENROLL FROM CONTAINER)"
+
+    #createOrderer4
+
   fi
 
   infoln "Generate CCP files for Org1 and Org2"

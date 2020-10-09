@@ -318,6 +318,9 @@ csr:
      - c220c25514aa
      - localhost
      - ca_orderer
+     - ca_orderer2
+     - ca_orderer3
+#     - ca_orderer4
    ca:
       expiry: 131400h
       pathlength: 1

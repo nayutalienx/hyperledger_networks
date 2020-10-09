@@ -1,2 +1,4 @@
 wallet
 !wallet/.gitkeep
+
+chaincode-go/vendor

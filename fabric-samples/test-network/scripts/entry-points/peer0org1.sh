@@ -23,4 +23,19 @@ cp /organizations/peerOrganizations/org1.example.com/msp/config.yaml /organizati
 
 fabric-ca-client enroll -u https://peer0:peer0pw@ca_org1:7054 --caname ca-org1 -M /organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp --csr.hosts peer0.org1.example.com --tls.certfiles /organizations/fabric-ca/org1/tls-cert.pem 
 
+# Set external builder
+sed -i 's/externalBuilders: \[\]/externalBuilders:/g' /etc/hyperledger/fabric/core.yaml
+sed -i 's/    # - path: \/path\/to\/directory/- path: \/builders\/golang/g' /etc/hyperledger/fabric/core.yaml
+sed -i 's/    #   name: descriptive-builder-name/  name: debug-builder/g' /etc/hyperledger/fabric/core.yaml
+sed -i 's/    #   propagateEnvironment:/  propagateEnvironment:/g' /etc/hyperledger/fabric/core.yaml
+sed -i 's/    #      - ENVVAR_NAME_TO_PROPAGATE_FROM_PEER/  - GONOPROXY/g' /etc/hyperledger/fabric/core.yaml
+sed -i 's/    #      - GOPROXY/  - GOPROXY/g' /etc/hyperledger/fabric/core.yaml
+sed -i "543 i\      - GOSUMDB" /etc/hyperledger/fabric/core.yaml
+sed -i "543 i\      - GONOSUMDB" /etc/hyperledger/fabric/core.yaml
+sed -i "543 i\      - GOCACHE" /etc/hyperledger/fabric/core.yaml
+sed -i "543 i\      - GOPATH" /etc/hyperledger/fabric/core.yaml
+sed -i "543 i\      - GOROOT" /etc/hyperledger/fabric/core.yaml
+sed -i "543 i\      - HOME" /etc/hyperledger/fabric/core.yaml
+sed -i "543 i\      - XDG_CACHE_HOME" /etc/hyperledger/fabric/core.yaml
+
 peer node start

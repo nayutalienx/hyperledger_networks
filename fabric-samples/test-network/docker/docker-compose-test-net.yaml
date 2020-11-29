@@ -228,18 +228,20 @@ services:
       - CORE_PEER_BCCSP_PKCS11_PIN=71811222
       - CORE_PEER_BCCSP_PKCS11_LABEL=fabric
       - SOFTHSM2_CONF=/etc/softhsm2.conf
-      - FABRIC_LOGGING_SPEC=debug
+      #- FABRIC_LOGGING_SPEC=debug
     volumes:
         - /var/run/:/host/var/run/
         - ../organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp:/etc/hyperledger/fabric/msp
         - ../organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls:/etc/hyperledger/fabric/tls
         - ../organizations:/organizations
         - ../scripts/entry-points/peer0org1.sh:/entrypoint.sh
+        - ../scripts/builders:/builders
         - peer0.org1.example.com:/var/hyperledger/production
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: sh -c '/entrypoint.sh'
     ports:
       - 7051:7051
+      - 40000:40000
     networks:
       - test
 
@@ -278,7 +280,7 @@ services:
       - CORE_PEER_BCCSP_PKCS11_PIN=71811222
       - CORE_PEER_BCCSP_PKCS11_LABEL=fabric
       - SOFTHSM2_CONF=/etc/softhsm2.conf
-      - FABRIC_LOGGING_SPEC=debug
+      #- FABRIC_LOGGING_SPEC=debug
     volumes:
         - /var/run/:/host/var/run/
         - ../organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp:/etc/hyperledger/fabric/msp
@@ -286,6 +288,7 @@ services:
         - peer0.org2.example.com:/var/hyperledger/production
         - ../organizations:/organizations
         - ../scripts/entry-points/peer0org2.sh:/entrypoint.sh
+        - ../scripts/builders:/builders
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: sh -c '/entrypoint.sh'
     ports:
